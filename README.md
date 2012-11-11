@@ -1,5 +1,7 @@
 # WordReference
 
+Authors: [malandrina](https://github.com/malandrina), [sandbochs](https://github.com/sandbochs)
+
 A Ruby wrapper for the [WordReference.com](http://www.wordreference.com) Dictionary API
 
 Documentation for the API can be found here: http://www.wordreference.com/docs/api.aspx 
