@@ -19,8 +19,21 @@ describe WordReference::Query do
     query.get_results.should eq ([:term])
   end
 
-  it "should create a Query object from the api data" do
-    Query.from_json(api_data).should be_instance_of(Query)
+  context "#self.from_json" do
+    let(:query2) { Query.from_json(api_data) }
+    let(:translation) { query2.get_results.first }
+
+    it "creates a Query object from the api data" do
+      query2.should be_instance_of(Query)
+    end
+
+    it "has the correct original term" do
+      translation.original['term'].should eq('chiave')
+    end
+
+    it "has the correct translations" do
+      translation.results.first.values.should include('key')
+    end
   end
 
 end
