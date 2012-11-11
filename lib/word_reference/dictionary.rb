@@ -28,6 +28,8 @@ module WordReference
       Query.from_json(data)
     end
 
+    #private
+
     def api_call(term)
       Net::HTTP.get_response(URI.parse(url(term))).body
     end

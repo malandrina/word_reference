@@ -1,6 +1,6 @@
 # WordReference
 
-TODO: Write a gem description
+A Ruby wrapper for the WordReference.com Dictionary API
 
 ## Installation
 

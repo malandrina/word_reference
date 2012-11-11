@@ -31,6 +31,10 @@ module WordReference
       @translations << translation
     end
 
+    def get_results
+      @translations.map { |translation| translation }
+    end
+
   end
 
 end

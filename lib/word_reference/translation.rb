@@ -2,11 +2,11 @@ module WordReference
 
   class Translation
 
-    attr_reader :original, :translations
+    attr_reader :original, :results
 
     def initialize
       @original = {}
-      @translations = []
+      @results = []
     end
 
     def self.from_query(data_array)
@@ -22,7 +22,7 @@ module WordReference
     end
 
     def set_translations(translations_array)
-      translations.replace(translations_array)
+      results.replace(translations_array)
     end
 
   end
