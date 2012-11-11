@@ -29,6 +29,12 @@ Or install it yourself as:
 
 ## Usage
 
+Include WordReference module
+
+```ruby
+include WordReference
+```
+
 In order to query the WordReference.com API, you will need an API key. You can get one here: http://www.wordreference.com/docs/APIregistration.aspx
 
 Configure your API key

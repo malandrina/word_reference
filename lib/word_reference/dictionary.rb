@@ -1,6 +1,6 @@
 require 'open-uri'
 require 'net/http'
-require_relative './query'
+require 'query'
 
 module WordReference
   

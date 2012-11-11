@@ -1,5 +1,5 @@
 require 'json'
-require_relative './translation'
+require 'translation'
 
 module WordReference
   
