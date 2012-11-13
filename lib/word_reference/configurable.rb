@@ -4,6 +4,8 @@ module WordReference
 
     attr_writer :api_key
 
+    # Array of key NAMES used to configure settings before
+    # call to WordReference.com API is made
     class << self
       def keys
         @keys ||= [:api_key]

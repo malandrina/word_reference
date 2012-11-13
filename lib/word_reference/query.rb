@@ -1,5 +1,5 @@
 require 'json'
-require 'translation'
+require_relative 'translation'
 
 module WordReference
   
@@ -24,7 +24,7 @@ module WordReference
       new_query
     end
 
-    def get_results
+    def results
       @translations.map { |translation| translation }
     end
 

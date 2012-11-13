@@ -1,6 +1,6 @@
 require 'open-uri'
 require 'net/http'
-require 'query'
+require_relative 'query'
 
 module WordReference
   
@@ -10,33 +10,39 @@ module WordReference
 
     attr_reader :name, :api_key
 
-    def initialize(dictionary_name)
-      # comments
-      WordReference::Configurable.keys.each do |key|
-        instance_variable_set(:"@#{key}", WordReference.instance_variable_get(:"@#{key}"))
-      end
+    BASE_URL = "http://api.wordreference.com"
 
+    def initialize(dictionary_name)
       @name = dictionary_name
+      config
     end
 
-    def change_to(dictionary_name)
+    def change_language(dictionary_name)
       @name = dictionary_name
     end
 
     def query(term)
-      data = api_call(term)
-      Query.from_json(data)
+      Query.from_json(api_call(term))
     end
 
     private
 
+    # Configures each setting for API call
+    def config
+      WordReference::Configurable.keys.each do |key|
+        instance_variable_set(:"@#{key}", WordReference.instance_variable_get(:"@#{key}"))
+      end
+    end
+
+    ### test using #send
+    ### use FakeWeb
+    ## testing that get_response is being called on Net::HTTP and that parse is being called on URI
     def api_call(term)
       Net::HTTP.get_response(URI.parse(url(term))).body
     end
 
     def url(term)
-      base_url = "http://api.wordreference.com"
-      "#{base_url}/0.8/#{api_key}/json/#{name}/#{term}"
+      "#{BASE_URL}/0.8/#{api_key}/json/#{name}/#{term}"
     end
 
   end

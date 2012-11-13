@@ -10,7 +10,6 @@ Documentation for the API can be found here: http://www.wordreference.com/docs/a
 
 - Handle exceptions
 - Handle errors from WordReference.com API
-- Add usage instructions for words with special characters
 - Add interface for thesaurus API
 
 ## Installation
@@ -71,7 +70,7 @@ french_dictionary = Dictionary.new('enfr')
 Change dictionary
 
 ```ruby
-french_dictionary.change_to('iten')
+french_dictionary.change_language('iten')
 # Or create another dictionary
 italian_dictionary = Dictionary.new('iten')
 ```
@@ -91,26 +90,26 @@ Get query results
 
 ```ruby
 # Returns an array of translations
-query.get_results
+query.results
 ```
 
 When #query is called on a dictionary, a collection of translation objects is returned.
 
-Get original term
+Get original search term
 
 ```ruby
-translation = query.get_results.first
-translation.original => {"term"=>"chiave", "POS"=>"nf", "sense"=>"strumento per aprire", "usage"=>"letterale"}
-translation.original['term'] => 'chiave'
-translation.original['POS'] => 'nf' # 'POS' stands for 'Particle of Speech'
-translation.original['sense'] => 'strumento per aprire'
-translation.original['usage'] => 'letterale'
+translation = query.results.first
+translation.search_term => {"term"=>"chiave", "POS"=>"nf", "sense"=>"strumento per aprire", "usage"=>"letterale"}
+translation.search_term['term'] => 'chiave'
+translation.search_term['POS'] => 'nf' # 'POS' stands for 'Particle of Speech'
+translation.search_term['sense'] => 'strumento per aprire'
+translation.search_term['usage'] => 'letterale'
 ```
 
 Get translations
 
 ```ruby
-translation = query.get_results.first
+translation = query.results.first
 first = translation.results.first
 first => {"term"=>"key", "POS"=>"n", "sense"=>""}
 first['term'] => 'key'
