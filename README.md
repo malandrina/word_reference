@@ -11,6 +11,7 @@ Documentation for the API can be found here: http://www.wordreference.com/docs/a
 - Handle exceptions
 - Handle errors from WordReference.com API
 - Add interface for thesaurus API
+- Install Travis CI
 
 ## Installation
 
