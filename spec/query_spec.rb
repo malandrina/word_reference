@@ -1,4 +1,5 @@
 require_relative 'spec_helper'
+require 'yaml'
 
 describe WordReference::Query do
   let(:query) { Query.new }
