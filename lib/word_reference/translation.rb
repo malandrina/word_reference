@@ -1,7 +1,5 @@
 module WordReference
-
   class Translation
-
     attr_reader :search_term, :results
 
     def initialize
@@ -33,7 +31,5 @@ module WordReference
     def set_translations!(translations_array)
       results.replace(translations_array)
     end
-
   end
-
 end
