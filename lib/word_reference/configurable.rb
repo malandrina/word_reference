@@ -1,7 +1,5 @@
 module WordReference
-
   module Configurable
-
     attr_writer :api_key
 
     # Array of key NAMES used to configure settings before
@@ -16,7 +14,5 @@ module WordReference
       yield self
       self
     end
-
   end
-
 end
