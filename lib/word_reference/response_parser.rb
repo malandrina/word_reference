@@ -5,41 +5,51 @@ module WordReference
   class ResponseParser
     def initialize(response)
       @response = response
+      @query = Query.new
     end
 
     def run
-      terms = []
-      data = JSON::load(response)
-      terms = terms_without_labels(data) # Removes term labels
-      terms = clean_terms(terms) # Remove Original, LINES, and END hashes
-      terms = term_translations(terms) # Strips everything but the actual translations
+      query_results = sanitized_response
 
-      # Create each translation object and add to translations array
-      new_query = Query.new
-      terms.each do |query_data|
-        translation = Translation.from_query(query_data.values)
-        new_query.add_translation(translation)
+      query_results.each do |query_result|
+        translation = Translation.from_query(query_result.values)
+        query.add_translation(translation)
       end
-      new_query
+
+      query
     end
   end
 
   private
 
-  attr_reader :response
-
-  def terms_without_labels(data)
-    data.map { |term| term[1] }
-  end
+  attr_reader :query, :response
 
   def clean_terms(terms)
     3.times { terms.pop }
     terms
   end
 
+  def json_response
+    JSON::load(response)
+  end
+
+  def sanitized_response
+    terms = terms_without_labels(json_response)
+    terms = clean_terms(terms) # Remove Original, LINES, and END hashes
+    term_translations(terms) # Strips everything but the actual translations
+  end
+
   def term_translations(terms)
     terms.map do |translation|
-      translation["PrincipalTranslations"].values
+      translations_key(translation).values
     end.flatten
+  end
+
+  def terms_without_labels(data)
+    data.map { |term| term[1] }
+  end
+
+  def translations_key(translation)
+    translation['PrincipalTranslations'] || translation['Entries']
   end
 end
